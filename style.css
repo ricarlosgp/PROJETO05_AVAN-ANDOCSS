@@ -1,0 +1,255 @@
+/*para declarar uma variável devemos inserir dois traços -- e o nome que eu quero de minha prefrência.
+Ex: quero declarar uma variável com nome fonte famyle para o heading. Então fica assim: --fonte famyle-heading
+Ex: quero declarar uma variável com nome ff para o texting. Então fica assim: --ff-texting
+Uma das vantagens das variáveis é que colocamos no :root e quando for para alterar todas as fontes em meus elementos
+de uma só vez eu troca no :root e é claro que tenho que inserir a nova fonte no HTML*/
+
+* { /*iremos resetar as configurações abaixo*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*border-box informa ao navegador para considerar qualquer borda e preenchimento nos valores especificados para a 
+    largura e a altura de um elemento.  box-sizing: border-box é o estilo padrão que os navegadores usam para os elementos 
+    <table>, <select>e <button>e para <input> elementos cujo tipo é radio, checkbox, reset, button, submit, color ou search.*/
+}
+:root {
+    /*:root é uma pseudo-classe CSS que corresponde ao elemento raiz de uma árvore que representa o documento. Nele podemos
+    declarar variáveis CSS globais para serem utilizados em todo escopo do meu projeto seja no header, main etc..*/
+    --ff-heading: 'Epilogue', sans-serif;
+    /*aqui estou definindo o nome de minha variável de --ff para o -heading(cabeçalho) com as fontes 'Epilogue', sans-serif.
+    A variável pod ser utilizada mais tarde para outros elementos. */
+    --ff-texting: 'Open sans', sans-serif;
+    --bg-primary:#28293E;
+    --fc-primary: #ffffff;
+    --fc-secundary: #bbb3e6;
+    --fc-secundary-dark: hsl(250, 100%, 11%, 1); 
+
+    font-size: 62.5%; /*para não ficarmos divindindo po 16 para encontrar o rem, colocamos o elemento raiz (:root) e definimos o valor
+    para a uidade de medida font-size com 62.5%. Se colocar 100% a unidade de medida padrão que é 16px continuaria com o tamanho de 16px
+    então  62.5% de 16px corresponderá a 10px aí não precisamos mais fazer a divisão por 16 para encontrar o pixel basta dividir por 10
+    (coloca o ponto e o nome rem) Ex: 60px = 6.0rem    48px=4.8rem  354px=35.4rem*/ 
+    
+    --fs-body: 1.6rem; /*declarando uma variável chamada --fs-body para o body com 1.6rem. Essa variável substitui o font-size acima.*/   
+    --fs-heading: clamp(4rem, 1rem + 5vw, 5.6rem);
+    /* A função CLAMP no CSS fixa um valor intermediário dentro de um intervalo de valores entre um limite mínimo definido e um limite máximo. 
+    A função recebe três parâmetros: um valor mínimo, um valor preferencial e um valor máximo permitido.clamp(). Com essa função
+    fica melhor de estilizar ao mudar de MOBILE para DESKTOP.
+    Mínimo = 4rem
+    Ideal = 1rem somado com 5vw (vw = view port widht), então sempre que eu mudar a largura da minha janela da viewport ele
+    fará com a soma de 1rem
+    Máximo = 5.6rem*/
+    --fs-heading-sm: clamp(2rem, 2rem, 4rem);
+    /*--fs-heading-sm: clamp(2rem, 2rem, 4rem) para configurar os h2 para visualizar no mobile s, mobile m, moblie l, tablet com 768px
+    laptop com 1024px, laptop l 1440px e 4k com 2560px */
+}
+body {
+    font-family: var(--ff-texting); 
+    /*utilizando a variável de nome -ff-texting no elemento body*/
+    background-color: var(--bg-primary);
+    /*o background-color recebe a variável --bg-primary*/    
+    color: var(--fc-primary);
+    /*as cores dos textos do body recberão a variável --fc-primary */
+    font-size: var(--fs-body);
+   
+}
+
+.page { /*configurando o page para ajustar a img. Veja no DevTools */
+    max-width: clamp(33rem,  30rem + 60vw, 117rem);
+    padding: 0.5rem;
+    margin: 0 auto;
+}
+
+img {/*configurando o img para ajustar ao page. Veja no DevTools */
+    width: 100%;
+    height: auto;
+}
+
+header {
+    margin: 10rem 0 8rem;
+    font-family: var(--ff-heading);
+    /*aqui estou utilizando a variável de nome -ff-heading no elemento header*/
+    text-transform: uppercase;
+    /* A text-transform pode ser usado para fazer com que o texto apareça em letras maiúsculas ou minúsculas, 
+    ou com cada palavra em maiúscula. Ex:
+    uppercase= É uma palavra-chave que converte todos os caracteres em maiúsculas.
+    lowercase= É uma palavra-chave que converte todos os caracteres em minúsculas.
+    none = É uma palavra-chave que impede que todas as maiúsculas e minúsculas de todos os caracteres sejam alteradas.
+    */
+    text-align: center;
+}
+header p{
+    color: var(--fc-secundary);
+    /*as cores dos textos do header p recberão a variável ----fc-secundary */
+    letter-spacing: 3px;
+    /*define o espaçamento horizontal entre os caracteres de texto.*/
+    line-height: 3.2rem;
+    font-weight: 400;
+    margin-bottom: 1.7rem;
+}
+
+header h1 {
+    font-weight: 800;
+    font-size: var(--fs-heading);
+    line-height: 4.8rem;
+}
+
+main {
+    display: grid; /*O elemento se comporta como um elemento de bloco e apresenta seu conteúdo de acordo com o modelo de grade
+    se não houver o display:grid o gap não ficará no tamnho informado.*/
+    gap: 3.2rem;
+
+
+}
+.card {
+    position: relative;
+    /*para os h2 ficarem posicionados relativamente à sua caixa em sua respectiva imagem. Para isso precisamos
+    configurar o .card h2*/
+    font-family: var(--ff-heading);
+}
+
+.card h2 {
+    /*todos os h2 ficarão na posição absoluta abaixo*/
+    position: absolute; /*posição absoluta do h2 no .card Aqui a posição é absoluta em relação à posição relativa do
+    .card para que haja um position:absolute é preciso de um position: relative e todos os valores abaixo do position:absolute
+    será referido ao próprio position:absolute*/
+    bottom: 5.2rem; /*valor para o position:absolute*/
+    left: 2,8rem ; /*valor para o position:absolute*/
+    font-size: var(--fs-heading-sm) ;
+    font-weight: 800;
+
+    display: flex;
+    flex-direction: column;
+    /*ao inserir o flex-direction: column, todas as caixas do .card h2 aumentram de comprimento ou height e para
+    que elas voltem ao padrão é preciso configurar no .card h2 span um widht:fit-content */
+    gap: 2.8rem;
+
+}
+
+.card img { /*configurando todas as imagens da DIV CLASS CARD*/
+    height: 41.6rem;
+    border-radius: 0.6rem;
+    object-fit: cover;
+    /* object-fit ou ajuste ao objeto é para redimensionar esse objeto para caber em seu contêiner.
+    Valores:
+    contain = O conteúdo substituído é dimensionado para manter sua proporção enquanto se ajusta à caixa de 
+    conteúdo do elemento. O objeto inteiro é feito para preencher a caixa, preservando sua proporção, de modo
+    que o objeto será "caixa de letras" se sua proporção não corresponder à proporção da caixa.
+
+    cover = O conteúdo substituído é dimensionado para manter sua proporção enquanto preenche toda a caixa de
+    conteúdo do elemento. Se a proporção do objeto não corresponder à proporção de sua caixa, o objeto será cortado
+    para caber.
+    
+    fill = O conteúdo substituído é dimensionado para preencher a caixa de conteúdo do elemento. 
+    O objeto inteiro preencherá completamente a caixa. Se a proporção do objeto não corresponder à proporção de 
+    sua caixa, o objeto será esticado para caber.
+
+    none = O conteúdo substituído não é redimensionado.
+
+    scale-down = O conteúdo é dimensionado como se noneou containfosse especificado, o que resultar em um tamanho 
+    de objeto concreto menor. */
+    transition: all 200ms;
+    /* esse transition tranform all de 200milissegundo irá suavizar, o tranform do .card img:hover*/
+    
+    
+}
+
+.card img:hover {
+    /*:hover = flutuar é para animar textos, img etc.. Corresponde quando o usuário interage com um elemento com um 
+    dispositivo apontador, mas não necessariamente o ativa. Geralmente é acionado quando o usuário passa o mouse sobre
+    um elemento com o cursor (ponteiro do mouse).:hover. Nesse caso estamos interagindo com todas as img*/
+    transform: scale(1.1);
+    /*A propriedade CSS transform permite girar, dimensionar, inclinar ou traduzir um elemento. Ele modifica o espaço de coordenadas
+    do modelo de formatação visual CSS . transform*/
+    opacity: 0.4;
+    /*A opacity propriedade CSS define a opacidade de um elemento. A opacidade é o grau em que o conteúdo por trás de um elemento está oculto
+    e é o oposto da transparência.*/
+    
+}
+
+.card h2 span {
+    border-radius: 2rem;
+    background-color: var(--fc-primary);
+    font-size: var(--fs-body);
+    font-weight: 400;
+    color: var(--fc-secundary-dark);
+    
+    padding: 0 1.6rem;
+    width: fit-content; /*Na prática, isso significa que a caixa usará o espaço disponível, mas nunca mais do que max-content.*/
+    height: 3.8rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+/* *************************Iniciando Animações com CSS********************************/
+
+/*A regra ou at-rule de @keyframes no CSS controla as etapas de uma sequência de animação no CSS ao carregar ou entrar na página.
+At-rules são instruções CSS que instruem o CSS sobre como se comportar. Eles começam com um sinal de arroba ou at,'@'
+seguido por um identificador e inclui tudo até o próximo ponto e vírgula ou o próximo bloco CSS , o que ocorrer primeiro
+o sinal de arroba @ significa at*/
+
+
+@keyframes topdown {
+    /* após o @keyframes eu coloco o nome da animação de minha preferência nesse caso eu coloquei topdow mais poderia colocar
+    de cima para baixo e dentro da chave insira as instruções*/
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header { /*aplicando animação topdow no header ao entrar na página ou toda vez que ela for atualizada*/
+    animation: topdown 700ms;
+}
+
+/* Estilizando para Versão desktop com CSS*/
+
+@media (min-width: 70rem) {
+    
+
+    main {
+        grid-template-columns: 1fr 1fr;
+        /*definindo grid-template-columns com duas colunas*/
+    }
+    
+}
+
+@media (min-width: 93rem) {
+
+    main {
+        grid-template-areas: "A B B"
+        "C C D";
+        /*A grid-template-areas propriedade CSS especifica áreas de grade nomeadas, estabelecendo as células na grade e atribuindo nomes a elas.
+        Como temos 04 imagens chamamos de A B C D porém, há imagens mais larga e por isso colocamos B B C C aora para
+        ajustar essas imagens precisamos utilizar o nth-child() em cada main div*/
+    }
+
+    main div:nth-child(1) { /*nth-child ou nth-filho é uma pseudoclasse CSS que combina elementos com base em sua posição entre um grupo de irmãos.:nth-child() 
+        Estou determinando que dentro da main div irei pegar a div 1 ou nth-child(1)*/
+        grid-area: A; 
+        /* A propriedade abreviada grid-area no CSS especifica o tamanho e a localização de um item de grade dentro de uma grade , contribuindo com uma linha, 
+        uma extensão ou nada (automático) para o posicionamento da grade, especificando assim as bordas da área da grade.
+        Estou especificando a localização da div:nth-child(1) para a grid-area A */
+    }
+
+    main div:nth-child(2) {
+        grid-area: B;
+    }
+
+    main div:nth-child(3) {
+        grid-area: C;
+    }
+
+    main div:nth-child(4) {
+        grid-area: D;
+        
+    }
+    
+}
+
+
